@@ -49,3 +49,21 @@ a.link {
     flex-direction: column;
   }
 }
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.layout > div {
+  box-sizing: border-box;
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+}

@@ -19,8 +19,7 @@ a.link {
   font-size: 0.9rem;
 }
 .container {
-  padding: 2rem;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
   font-family: sans-serif;
 }
@@ -29,11 +28,7 @@ a.link {
   font-weight: bold;
 }
 .link {
-  color: #007BFF;
   text-decoration: underline;
-}
-.download {
-  margin-top: 1rem;
 }
 .card {
   border: 1px solid #ccc;
@@ -49,11 +44,8 @@ a.link {
   color: gray;
   margin-top: 2rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
-    padding: 1rem;
-  }
-  .headline {
-    font-size: 1.8rem;
+    flex-direction: column;
   }
 }

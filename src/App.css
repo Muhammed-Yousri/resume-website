@@ -19,7 +19,8 @@ a.link {
   font-size: 0.9rem;
 }
 .container {
-  max-width: 1200px;
+  padding: 2rem;
+  max-width: 1000px;
   margin: auto;
   font-family: sans-serif;
 }
@@ -29,6 +30,9 @@ a.link {
 }
 .link {
   text-decoration: underline;
+}
+.download {
+  margin-top: 1rem;
 }
 .card {
   border: 1px solid #ccc;
@@ -44,26 +48,11 @@ a.link {
   color: gray;
   margin-top: 2rem;
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .container {
-    flex-direction: column;
+    padding: 1rem;
   }
-}
-.layout {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.layout > div {
-  box-sizing: border-box;
-}
-
-/* Responsive: stack on smaller screens */
-@media (max-width: 768px) {
-  .layout {
-    flex-direction: column;
+  .headline {
+    font-size: 1.8rem;
   }
 }

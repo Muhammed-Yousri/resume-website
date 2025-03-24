@@ -1,5 +1,5 @@
-
 import React from "react";
+import './App.css';
 
 const resume = {
   name: "Muhammed Yousri Sherif",
@@ -96,14 +96,35 @@ const resume = {
   }
 };
 
+import { useState, useEffect } from "react";
+
 export default function ResumeWebsite() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
-    <div style={{ padding: '2rem', maxWidth: '1000px', margin: 'auto', fontFamily: 'sans-serif' }}>
-      <header style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{resume.name}</h1>
-        <p>{resume.contact.location} | {resume.contact.phone} | <a href={`mailto:${resume.contact.email}`} style={{ color: 'blue' }}>{resume.contact.email}</a></p>
-        <a href={resume.contact.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'blue' }}>LinkedIn</a>
+    <div className={`container ${theme}`}>
+      <header className="text-center">
+        <button onClick={toggleTheme} className="theme-toggle">
+          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </button>
+        <h1 className="headline">{resume.name}</h1>
+        <p>{resume.contact.location} | {resume.contact.phone} | <a href={`mailto:${resume.contact.email}`} className="link">{resume.contact.email}</a></p>
+        <a href={resume.contact.linkedin} target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a>
       </header>
+
+      <div className="text-center download">
+        <a href="/Muhammed_Yousri_Sherif_CV_2025.pdf" download className="link">
+          📄 Download CV (PDF)
+        </a>
+      </div>
 
       <section>
         <h2>Professional Summary</h2>
@@ -122,7 +143,7 @@ export default function ResumeWebsite() {
       <section>
         <h2>Professional Experience</h2>
         {resume.professional_experience.map((job, index) => (
-          <div key={index} style={{ border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem' }}>
+          <div key={index} className="card">
             <h3>{job.title} @ {job.company}</h3>
             <p><i>{job.location} | {job.duration}</i></p>
             <ul>
@@ -178,8 +199,18 @@ export default function ResumeWebsite() {
         </ul>
       </section>
 
-      <footer style={{ textAlign: 'center', fontSize: '0.875rem', color: 'gray', marginTop: '2rem' }}>
+      <footer className="footer">
         <p>© {new Date().getFullYear()} Muhammed Yousri Sherif. All rights reserved.</p>
+        <div className="text-center" style={{ marginTop: '1rem' }}>
+          <a
+            href="https://wa.me/201140611051"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            💬 Contact via WhatsApp
+          </a>
+        </div>
       </footer>
     </div>
   );

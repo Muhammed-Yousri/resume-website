@@ -1,5 +1,7 @@
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import './App.css';
+// Removed incorrect import of public image
 
 const resume = {
   name: "Muhammed Yousri Sherif",
@@ -96,8 +98,6 @@ const resume = {
   }
 };
 
-import { useState, useEffect } from "react";
-
 export default function ResumeWebsite() {
   const [theme, setTheme] = useState('light');
 
@@ -110,108 +110,93 @@ export default function ResumeWebsite() {
   };
 
   return (
-    <div className={`container ${theme}`}>
-      <header className="text-center">
-        <button onClick={toggleTheme} className="theme-toggle">
-          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
-        </button>
-        <h1 className="headline">{resume.name}</h1>
-        <p>{resume.contact.location} | {resume.contact.phone} | <a href={`mailto:${resume.contact.email}`} className="link">{resume.contact.email}</a></p>
-        <a href={resume.contact.linkedin} target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a>
-      </header>
+    <div className={`container ${theme}`} style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div style={{ flex: '1 1 30%', padding: '1rem', minWidth: '280px' }}>
+        <img src="/IMG_0353.jpg" alt="Profile" style={{ width: '100%', borderRadius: '12px', marginBottom: '1rem' }} />
+        <h2>{resume.name}</h2>
+        <p>{resume.contact.location}</p>
+        <p>{resume.contact.phone}</p>
+        <p><a href={`mailto:${resume.contact.email}`} className="link">{resume.contact.email}</a></p>
+        <p><a href={resume.contact.linkedin} target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a></p>
 
-      <div className="text-center download">
-        <a href="/Muhammed_Yousri_Sherif_CV_2025.pdf" download className="link">
-          📄 Download CV (PDF)
-        </a>
-      </div>
-
-      <section>
-        <h2>Professional Summary</h2>
-        <p>{resume.professional_summary}</p>
-      </section>
-
-      <section>
-        <h2>Core Expertise</h2>
+        <h3>Skills</h3>
         <ul>
-          {resume.core_expertise.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
+          {resume.core_expertise.map((skill, i) => <li key={i}>{skill}</li>)}
         </ul>
-      </section>
 
-      <section>
-        <h2>Professional Experience</h2>
-        {resume.professional_experience.map((job, index) => (
-          <div key={index} className="card">
-            <h3>{job.title} @ {job.company}</h3>
-            <p><i>{job.location} | {job.duration}</i></p>
-            <ul>
-              {job.responsibilities.map((res, i) => (
-                <li key={i}>{res}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Education</h2>
-        <p>{resume.education.degree} - {resume.education.institution} ({resume.education.duration})</p>
-      </section>
-
-      <section>
-        <h2>Awards & Achievements</h2>
+        <h3>Certifications</h3>
         <ul>
-          {resume.awards.map((award, index) => (
-            <li key={index}>{award}</li>
-          ))}
+          {resume.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
         </ul>
-      </section>
 
-      <section>
-        <h2>Certifications</h2>
-        <ul>
-          {resume.certifications.map((cert, index) => (
-            <li key={index}>{cert}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>Technical Skills</h2>
-        {Object.entries(resume.technical_skills).map(([category, skills], index) => (
-          <div key={index}>
-            <h4>{category.replace('_', ' ')}</h4>
-            <ul>
-              {skills.map((s, i) => <li key={i}>{s}</li>)}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Languages</h2>
+        <h3>Languages</h3>
         <ul>
           {Object.entries(resume.languages).map(([lang, level], index) => (
             <li key={index}>{lang}: {level}</li>
           ))}
         </ul>
-      </section>
 
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} Muhammed Yousri Sherif. All rights reserved.</p>
-        <div className="text-center" style={{ marginTop: '1rem' }}>
-          <a
-            href="https://wa.me/201140611051"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link"
-          >
-            💬 Contact via WhatsApp
-          </a>
-        </div>
-      </footer>
+        <h3>Download</h3>
+        <a href="/Muhammed_Yousri_Sherif_CV_2025.pdf" download className="link">📄 Download CV</a>
+        <br />
+        <a href="https://wa.me/201140611051" target="_blank" rel="noopener noreferrer" className="link">💬 Contact via WhatsApp</a>
+      </div>
+
+      <div style={{ flex: '1 1 65%', padding: '1rem' }}>
+        <button onClick={toggleTheme} className="theme-toggle">
+          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </button>
+
+        <section>
+          <h2>Professional Summary</h2>
+          <p>{resume.professional_summary}</p>
+        </section>
+
+        <section>
+          <h2>Professional Experience</h2>
+          {resume.professional_experience.map((job, index) => (
+            <div key={index} className="card">
+              <h3>{job.title} @ {job.company}</h3>
+              <p><i>{job.location} | {job.duration}</i></p>
+              <ul>
+                {job.responsibilities.map((res, i) => (
+                  <li key={i}>{res}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <p>{resume.education.degree} - {resume.education.institution} ({resume.education.duration})</p>
+        </section>
+
+        <section>
+          <h2>Awards & Achievements</h2>
+          <ul>
+            {resume.awards.map((award, index) => (
+              <li key={index}>{award}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2>Technical Skills</h2>
+          {Object.entries(resume.technical_skills).map(([category, skills], index) => (
+            <div key={index}>
+              <h4>{category.replace('_', ' ')}</h4>
+              <ul>
+                {skills.map((s, i) => <li key={i}>{s}</li>)}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        <footer className="footer">
+          <p>© {new Date().getFullYear()} Muhammed Yousri Sherif. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
   );
 }
